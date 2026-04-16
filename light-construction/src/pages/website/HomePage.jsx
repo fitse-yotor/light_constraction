@@ -1,6 +1,8 @@
 import { useState } from 'react';
-import { Building2, Home, Wrench, HardHat, Ruler, Shield, ChevronLeft, ChevronRight, Mail, Phone, MapPin, Star, Share2, MessageCircle, Globe, AtSign } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { Building2, Home, Wrench, HardHat, Ruler, Shield, ChevronLeft, ChevronRight, Mail, Phone, MapPin, Star, ArrowRight } from 'lucide-react';
 import Navbar from './Navbar';
+import Footer from './Footer';
 import { services, portfolioProjects, teamMembers, testimonials } from '../../data/mockData';
 
 const iconMap = { Building2, Home, Wrench, HardHat, Ruler, Shield };
@@ -31,7 +33,7 @@ export default function HomePage() {
           </p>
           <div style={{ display: 'flex', gap: 16, justifyContent: 'center', flexWrap: 'wrap' }}>
             <a href="#contact" className="btn btn-primary btn-lg">Request a Quote</a>
-            <a href="#projects" className="btn btn-outline btn-lg" style={{ color: '#fff', borderColor: '#fff' }}>View Our Work</a>
+            <Link to="/portfolio" className="btn btn-outline btn-lg" style={{ color: '#fff', borderColor: '#fff' }}>View Our Work</Link>
           </div>
           <div style={{ display: 'flex', gap: 48, justifyContent: 'center', marginTop: 64, flexWrap: 'wrap' }}>
             {[['150+', 'Projects Done'], ['15+', 'Years Experience'], ['98%', 'Client Satisfaction']].map(([num, label]) => (
@@ -52,20 +54,26 @@ export default function HomePage() {
             <p>Comprehensive construction solutions tailored to your needs</p>
           </div>
           <div className="grid-3">
-            {services.map(s => {
+            {services.slice(0, 6).map(s => {
               const Icon = iconMap[s.icon] || Building2;
               return (
-                <div key={s.title} className="card" style={{ transition: 'transform 0.2s, box-shadow 0.2s', cursor: 'default' }}
+                <div key={s.id} className="card" style={{ display: 'flex', flexDirection: 'column', transition: 'transform 0.2s, box-shadow 0.2s' }}
                   onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-6px)'; e.currentTarget.style.boxShadow = 'var(--shadow-md)'; }}
                   onMouseLeave={e => { e.currentTarget.style.transform = 'none'; e.currentTarget.style.boxShadow = 'var(--shadow)'; }}>
                   <div style={{ width: 52, height: 52, background: 'linear-gradient(135deg, var(--primary), var(--primary-light))', borderRadius: 12, display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: 16 }}>
                     <Icon size={24} color="#fff" />
                   </div>
                   <h3 style={{ marginBottom: 8, fontSize: 17 }}>{s.title}</h3>
-                  <p style={{ color: 'var(--text-secondary)', fontSize: 14, lineHeight: 1.7 }}>{s.desc}</p>
+                  <p style={{ color: 'var(--text-secondary)', fontSize: 14, lineHeight: 1.7, flex: 1 }}>{s.desc}</p>
+                  <Link to={`/services/${s.id}`} style={{ marginTop: 16, display: 'inline-flex', alignItems: 'center', gap: 6, color: 'var(--primary)', fontWeight: 600, fontSize: 14 }}>
+                    Read More <ArrowRight size={14} />
+                  </Link>
                 </div>
               );
             })}
+          </div>
+          <div style={{ textAlign: 'center', marginTop: 40 }}>
+            <Link to="/services" className="btn btn-outline">View All Services</Link>
           </div>
         </div>
       </section>
@@ -78,23 +86,29 @@ export default function HomePage() {
             <p>A selection of our most impactful completed and ongoing projects</p>
           </div>
           <div className="grid-3">
-            {portfolioProjects.map(p => (
-              <div key={p.title} style={{ borderRadius: 'var(--radius)', overflow: 'hidden', position: 'relative', cursor: 'pointer', boxShadow: 'var(--shadow)' }}
+            {portfolioProjects.slice(0, 6).map(p => (
+              <div key={p.id} style={{ borderRadius: 'var(--radius)', overflow: 'hidden', position: 'relative', cursor: 'pointer', boxShadow: 'var(--shadow)' }}
                 onMouseEnter={e => e.currentTarget.querySelector('.overlay').style.opacity = 1}
                 onMouseLeave={e => e.currentTarget.querySelector('.overlay').style.opacity = 0}>
                 <img src={p.img} alt={p.title} style={{ width: '100%', height: 240, objectFit: 'cover', display: 'block' }} />
                 <div className="overlay" style={{
                   position: 'absolute', inset: 0,
-                  background: 'linear-gradient(to top, rgba(30,58,95,0.9), transparent)',
+                  background: 'linear-gradient(to top, rgba(30,58,95,0.92), transparent)',
                   display: 'flex', flexDirection: 'column', justifyContent: 'flex-end',
                   padding: 20, opacity: 0, transition: 'opacity 0.3s',
                 }}>
                   <span style={{ color: 'var(--primary-light)', fontSize: 12, fontWeight: 600, textTransform: 'uppercase', letterSpacing: 1 }}>{p.category}</span>
-                  <h3 style={{ color: '#fff', fontSize: 18, marginTop: 4 }}>{p.title}</h3>
+                  <h3 style={{ color: '#fff', fontSize: 17, marginTop: 4, marginBottom: 10 }}>{p.title}</h3>
+                  <Link to={`/portfolio/${p.id}`} style={{ display: 'inline-flex', alignItems: 'center', gap: 6, color: '#fff', fontWeight: 600, fontSize: 13, background: 'var(--primary)', padding: '6px 14px', borderRadius: 6, width: 'fit-content' }}>
+                    Read More <ArrowRight size={13} />
+                  </Link>
                 </div>
                 <div style={{ position: 'absolute', top: 12, left: 12, background: 'var(--primary)', color: '#fff', fontSize: 11, fontWeight: 600, padding: '3px 10px', borderRadius: 20 }}>{p.category}</div>
               </div>
             ))}
+          </div>
+          <div style={{ textAlign: 'center', marginTop: 40 }}>
+            <Link to="/portfolio" className="btn btn-outline">View Full Portfolio</Link>
           </div>
         </div>
       </section>
@@ -110,7 +124,7 @@ export default function HomePage() {
               <span style={{ color: 'var(--primary)', fontWeight: 600, fontSize: 13, textTransform: 'uppercase', letterSpacing: 1 }}>About Us</span>
               <h2 style={{ marginTop: 8, marginBottom: 20 }}>Building Excellence Since 2010</h2>
               <p style={{ color: 'var(--text-secondary)', lineHeight: 1.8, marginBottom: 16 }}>
-                Light Construction is a full-service construction company with over 15 years of experience delivering residential, commercial, and infrastructure projects across the region.
+                Light Construction is a full-service construction company with over 15 years of experience delivering residential, commercial, and infrastructure projects across Ethiopia and East Africa.
               </p>
               <p style={{ color: 'var(--text-secondary)', lineHeight: 1.8, marginBottom: 32 }}>
                 Our team of certified engineers, architects, and project managers work together to ensure every project is completed on time, within budget, and to the highest quality standards.
@@ -123,7 +137,7 @@ export default function HomePage() {
                   </div>
                 ))}
               </div>
-              <a href="#contact" className="btn btn-primary">Get In Touch</a>
+              <Link to="/about" className="btn btn-primary">Learn More About Us</Link>
             </div>
           </div>
         </div>
@@ -191,9 +205,9 @@ export default function HomePage() {
             <div>
               <div style={{ display: 'flex', flexDirection: 'column', gap: 24, marginBottom: 40 }}>
                 {[
-                  [Phone, '+1 (555) 234-5678', 'Call Us'],
+                  [Phone, '+251 911 234 567', 'Call Us'],
                   [Mail, 'info@lightconstruction.com', 'Email Us'],
-                  [MapPin, '123 Builder Ave, Construction City, CC 10001', 'Visit Us'],
+                  [MapPin, 'Bole, Addis Ababa, Ethiopia', 'Visit Us'],
                 ].map(([Icon, val, label]) => (
                   <div key={label} style={{ display: 'flex', gap: 16, alignItems: 'flex-start' }}>
                     <div style={{ background: 'var(--primary)', borderRadius: 10, padding: 10, flexShrink: 0 }}>
@@ -222,52 +236,7 @@ export default function HomePage() {
         <style>{`@media(max-width:768px){#contact .container > div{grid-template-columns:1fr!important;}}`}</style>
       </section>
 
-      {/* Footer */}
-      <footer style={{ background: 'var(--primary-dark)', color: '#fff', padding: '64px 24px 32px' }}>
-        <div className="container">
-          <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr 1fr 1fr', gap: 40, marginBottom: 48 }}>
-            <div>
-              <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 16 }}>
-                <div style={{ background: 'var(--primary)', borderRadius: 8, padding: 6, display: 'flex' }}><HardHat size={20} /></div>
-                <span style={{ fontFamily: 'Montserrat', fontWeight: 700, fontSize: 16 }}>Light Construction</span>
-              </div>
-              <p style={{ color: 'rgba(255,255,255,0.6)', fontSize: 14, lineHeight: 1.8, marginBottom: 20 }}>
-                Building excellence since 2010. Your trusted partner for all construction needs.
-              </p>
-              <div style={{ display: 'flex', gap: 12 }}>
-                {[Share2, MessageCircle, Globe, AtSign].map((Icon, i) => (
-                  <a key={i} href="#" style={{ background: 'rgba(255,255,255,0.1)', borderRadius: 8, padding: 8, display: 'flex', transition: 'background 0.2s' }}
-                    onMouseEnter={e => e.currentTarget.style.background = 'var(--primary)'}
-                    onMouseLeave={e => e.currentTarget.style.background = 'rgba(255,255,255,0.1)'}>
-                    <Icon size={16} color="#fff" />
-                  </a>
-                ))}
-              </div>
-            </div>
-            {[
-              ['Quick Links', ['Home', 'About', 'Services', 'Projects', 'Contact']],
-              ['Services', ['Commercial', 'Residential', 'Renovation', 'Planning', 'Safety']],
-              ['Contact', ['+1 (555) 234-5678', 'info@lightconstruction.com', '123 Builder Ave', 'Mon-Fri 8am-6pm']],
-            ].map(([title, items]) => (
-              <div key={title}>
-                <h4 style={{ fontSize: 15, marginBottom: 16, color: 'var(--primary-light)' }}>{title}</h4>
-                <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: 10 }}>
-                  {items.map(item => (
-                    <li key={item}><a href="#" style={{ color: 'rgba(255,255,255,0.6)', fontSize: 14, transition: 'color 0.2s' }}
-                      onMouseEnter={e => e.target.style.color = '#fff'}
-                      onMouseLeave={e => e.target.style.color = 'rgba(255,255,255,0.6)'}>{item}</a></li>
-                  ))}
-                </ul>
-              </div>
-            ))}
-          </div>
-          <div style={{ borderTop: '1px solid rgba(255,255,255,0.1)', paddingTop: 24, display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 12 }}>
-            <p style={{ color: 'rgba(255,255,255,0.5)', fontSize: 13 }}>© 2026 Light Construction. All rights reserved.</p>
-            <p style={{ color: 'rgba(255,255,255,0.5)', fontSize: 13 }}>Privacy Policy · Terms of Service</p>
-          </div>
-        </div>
-        <style>{`@media(max-width:768px){footer .container > div:first-child{grid-template-columns:1fr 1fr!important;}}`}</style>
-      </footer>
+      <Footer />
     </div>
   );
 }

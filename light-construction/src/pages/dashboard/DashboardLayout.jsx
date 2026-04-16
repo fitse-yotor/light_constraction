@@ -2,8 +2,8 @@ import { useState } from 'react';
 import { Link, useLocation, Outlet } from 'react-router-dom';
 import {
   LayoutDashboard, FolderKanban, Receipt, Kanban,
-  BarChart2, Settings, HardHat, Bell, Search,
-  ChevronLeft, ChevronRight, LogOut, User
+  BarChart2, Settings, Bell, Search,
+  ChevronLeft, ChevronRight, User, Images
 } from 'lucide-react';
 
 const navItems = [
@@ -11,6 +11,7 @@ const navItems = [
   { icon: FolderKanban, label: 'Projects', path: '/dashboard/projects' },
   { icon: Receipt, label: 'Expenses', path: '/dashboard/expenses' },
   { icon: Kanban, label: 'Canvas', path: '/dashboard/canvas' },
+  { icon: Images, label: 'Gallery', path: '/dashboard/gallery' },
   { icon: BarChart2, label: 'Reports', path: '/dashboard/reports' },
   { icon: Settings, label: 'Settings', path: '/dashboard/settings' },
 ];
@@ -34,11 +35,16 @@ export default function DashboardLayout() {
         overflow: 'hidden',
       }}>
         {/* Logo */}
-        <div style={{ padding: collapsed ? '20px 16px' : '20px 24px', display: 'flex', alignItems: 'center', gap: 10, borderBottom: '1px solid rgba(255,255,255,0.08)', minHeight: 70 }}>
-          <div style={{ background: 'var(--primary)', borderRadius: 8, padding: 6, display: 'flex', flexShrink: 0 }}>
-            <HardHat size={20} color="#fff" />
-          </div>
-          {!collapsed && <span style={{ color: '#fff', fontFamily: 'Montserrat', fontWeight: 700, fontSize: 14, whiteSpace: 'nowrap' }}>Light Construction</span>}
+        <div style={{ padding: collapsed ? '12px 16px' : '12px 20px', display: 'flex', alignItems: 'center', gap: 10, borderBottom: '1px solid rgba(255,255,255,0.08)', minHeight: 70 }}>
+          {collapsed ? (
+            <div style={{ background: 'rgba(255,255,255,0.95)', borderRadius: 6, padding: '2px 4px', display: 'flex' }}>
+              <img src="/logo.png" alt="LC" style={{ height: 32, width: 32, objectFit: 'contain' }} />
+            </div>
+          ) : (
+            <div style={{ background: 'rgba(255,255,255,0.95)', borderRadius: 8, padding: '4px 8px' }}>
+              <img src="/logo.png" alt="Light Construction" style={{ height: 40, width: 'auto', objectFit: 'contain', display: 'block' }} />
+            </div>
+          )}
         </div>
 
         {/* Nav */}

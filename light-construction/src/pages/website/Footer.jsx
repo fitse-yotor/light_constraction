@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { HardHat, Share2, MessageCircle, Globe, AtSign } from 'lucide-react';
+import { Share2, MessageCircle, Globe, AtSign } from 'lucide-react';
 
 export default function Footer() {
   return (
@@ -8,8 +8,9 @@ export default function Footer() {
         <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr 1fr 1fr', gap: 40, marginBottom: 48 }}>
           <div>
             <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 16 }}>
-              <div style={{ background: 'var(--primary)', borderRadius: 8, padding: 6, display: 'flex' }}><HardHat size={20} /></div>
-              <span style={{ fontFamily: 'Montserrat', fontWeight: 700, fontSize: 16 }}>Light Construction</span>
+              <div style={{ background: 'rgba(255,255,255,0.95)', borderRadius: 8, padding: '4px 8px' }}>
+                <img src="/logo.png" alt="Light Construction" style={{ height: 36, width: 'auto', objectFit: 'contain', display: 'block' }} />
+              </div>
             </div>
             <p style={{ color: 'rgba(255,255,255,0.6)', fontSize: 14, lineHeight: 1.8, marginBottom: 20 }}>
               Building excellence since 2010. Your trusted partner for all construction needs.

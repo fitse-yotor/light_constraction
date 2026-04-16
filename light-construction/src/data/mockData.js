@@ -267,3 +267,46 @@ export const founderData = {
     { title: "Lakeside Resort", img: "https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=600&q=80", value: "$1.8M", year: 2022 },
   ],
 };
+
+export const coFounderData = {
+  name: "Tigist Haile",
+  title: "Co-Founder & COO, Light Construction",
+  tagline: "Turning Vision into Reality, Project by Project",
+  img: "https://randomuser.me/api/portraits/women/44.jpg",
+  coverImg: "https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=1600&q=80",
+  bio: [
+    "Tigist Haile is a seasoned construction and operations executive who co-founded Light Construction alongside Abebe Girma in 2010. With a background in architecture and project management, she brings a unique blend of creative vision and operational discipline to every project the company undertakes.",
+    "Tigist studied Architecture at Addis Ababa University before pursuing a Master's in Project Management at the University of Cape Town. Her international exposure shaped her belief that Ethiopian construction could meet and exceed global standards.",
+    "As Chief Operating Officer, Tigist oversees all project delivery, quality assurance, and client relations. Her hands-on leadership style and commitment to excellence have been instrumental in building Light Construction's reputation for on-time, on-budget delivery.",
+  ],
+  stats: [
+    { label: "Years Experience", value: "18+" },
+    { label: "Projects Managed", value: "120+" },
+    { label: "Client Satisfaction", value: "99%" },
+    { label: "Team Members", value: "150+" },
+  ],
+  education: [
+    { degree: "BSc Architecture", school: "Addis Ababa University", year: "2003" },
+    { degree: "MSc Project Management", school: "University of Cape Town", year: "2007" },
+    { degree: "LEED Green Associate", school: "US Green Building Council", year: "2012" },
+  ],
+  awards: [
+    { title: "Women in Construction Leadership Award", org: "Ethiopian Women in Business", year: "2023" },
+    { title: "Best Project Manager of the Year", org: "Ethiopian Construction Association", year: "2020" },
+    { title: "Sustainable Building Champion", org: "Green Building Council Ethiopia", year: "2018" },
+  ],
+  milestones: [
+    { year: "2003", event: "Graduated with BSc Architecture, AAU" },
+    { year: "2007", event: "Completed MSc Project Management, Cape Town" },
+    { year: "2008", event: "Joined Bechtel Corporation, Nairobi as Project Architect" },
+    { year: "2010", event: "Co-founded Light Construction with Abebe Girma" },
+    { year: "2014", event: "Led delivery of first $1M+ project — Green Valley Villas" },
+    { year: "2018", event: "Introduced LEED-certified design standards company-wide" },
+    { year: "2023", event: "Received Women in Construction Leadership Award" },
+  ],
+  featuredProjects: [
+    { title: "Green Valley Villas", img: "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=600&q=80", value: "$1.2M", year: 2024 },
+    { title: "Riverside Apartments", img: "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=600&q=80", value: "$850K", year: 2024 },
+    { title: "Lakeside Resort", img: "https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=600&q=80", value: "$1.8M", year: 2022 },
+  ],
+};

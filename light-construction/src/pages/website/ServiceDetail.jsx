@@ -1,5 +1,5 @@
 import { useParams, Link } from 'react-router-dom';
-import { Building2, Home, Wrench, HardHat, Ruler, Shield, ArrowLeft, CheckCircle, Clock, FolderKanban } from 'lucide-react';
+import { Building2, Home, Wrench, HardHat, Ruler, Shield, ArrowLeft, ArrowRight, CheckCircle, Clock, FolderKanban } from 'lucide-react';
 import Navbar from './Navbar';
 import Footer from './Footer';
 import { services } from '../../data/mockData';

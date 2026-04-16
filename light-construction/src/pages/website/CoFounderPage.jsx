@@ -1,9 +1,9 @@
 import { Link } from 'react-router-dom';
-import { Award, GraduationCap, Briefcase, ArrowLeft } from 'lucide-react';
-import { founderData } from '../../data/mockData';
+import { Award, GraduationCap, ArrowLeft } from 'lucide-react';
+import { coFounderData } from '../../data/mockData';
 
-export default function FounderPage() {
-  const f = founderData;
+export default function CoFounderPage() {
+  const f = coFounderData;
 
   return (
     <div style={{ background: '#fff', minHeight: '100vh' }}>
@@ -13,12 +13,12 @@ export default function FounderPage() {
           <ArrowLeft size={16} /> Back to Website
         </Link>
         <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
-          <Link to="/co-founder" style={{ color: 'rgba(255,255,255,0.6)', fontSize: 13, transition: 'color 0.2s' }}
+          <Link to="/founder" style={{ color: 'rgba(255,255,255,0.6)', fontSize: 13, transition: 'color 0.2s' }}
             onMouseEnter={e => e.target.style.color = '#fff'}
             onMouseLeave={e => e.target.style.color = 'rgba(255,255,255,0.6)'}>
-            View Co-Founder Portfolio →
+            View Founder Portfolio →
           </Link>
-          <span style={{ color: 'rgba(255,255,255,0.5)', fontSize: 13 }}>Founder Portfolio</span>
+          <span style={{ color: 'rgba(255,255,255,0.5)', fontSize: 13 }}>Co-Founder Portfolio</span>
         </div>
       </div>
 
@@ -26,13 +26,12 @@ export default function FounderPage() {
       <div style={{ position: 'relative' }}>
         <div style={{
           height: 380,
-          background: `linear-gradient(to bottom, rgba(30,58,95,0.5), rgba(30,58,95,0.85)), url(${f.coverImg}) center/cover no-repeat`,
+          background: `linear-gradient(to bottom, rgba(30,58,95,0.45), rgba(30,58,95,0.88)), url(${f.coverImg}) center/cover no-repeat`,
         }} />
         <div className="container" style={{ position: 'relative' }}>
           <div style={{
             display: 'flex', alignItems: 'flex-end', gap: 32,
-            marginTop: -80, paddingBottom: 32,
-            flexWrap: 'wrap',
+            marginTop: -80, paddingBottom: 32, flexWrap: 'wrap',
           }}>
             <img src={f.img} alt={f.name} style={{
               width: 140, height: 140, borderRadius: '50%', objectFit: 'cover',
@@ -61,7 +60,7 @@ export default function FounderPage() {
         </div>
       </section>
 
-      {/* Bio + Timeline */}
+      {/* Bio + Sidebar */}
       <section style={{ padding: '80px 24px' }}>
         <div className="container">
           <div style={{ display: 'grid', gridTemplateColumns: '1.4fr 1fr', gap: 64, alignItems: 'start' }}>
@@ -116,10 +115,18 @@ export default function FounderPage() {
                   </div>
                 ))}
               </div>
+
+              {/* Link to founder */}
+              <div className="card" style={{ background: 'var(--bg)', border: '1px solid #e2e8f0' }}>
+                <p style={{ fontSize: 13, color: 'var(--text-secondary)', marginBottom: 12 }}>Also see the Founder's portfolio</p>
+                <Link to="/founder" className="btn btn-outline" style={{ width: '100%', justifyContent: 'center' }}>
+                  Abebe Girma — Founder
+                </Link>
+              </div>
             </div>
           </div>
         </div>
-        <style>{`@media(max-width:768px){section .container > div[style*="grid-template-columns: 1.4fr"]{grid-template-columns:1fr!important;}}`}</style>
+        <style>{`@media(max-width:768px){section .container > div[style*="1.4fr"]{grid-template-columns:1fr!important;}}`}</style>
       </section>
 
       {/* Featured Projects */}
@@ -145,7 +152,7 @@ export default function FounderPage() {
 
       {/* Footer note */}
       <div style={{ background: 'var(--primary-dark)', padding: '24px', textAlign: 'center' }}>
-        <p style={{ color: 'rgba(255,255,255,0.5)', fontSize: 13 }}>© 2026 Abebe Girma · Light Construction · All rights reserved.</p>
+        <p style={{ color: 'rgba(255,255,255,0.5)', fontSize: 13 }}>© 2026 Tigist Haile · Light Construction · All rights reserved.</p>
       </div>
     </div>
   );
