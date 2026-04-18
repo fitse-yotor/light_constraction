@@ -3,24 +3,47 @@ import { Link, useLocation, Outlet } from 'react-router-dom';
 import {
   LayoutDashboard, FolderKanban, Receipt, Kanban,
   BarChart2, Settings, Bell, Search,
-  ChevronLeft, ChevronRight, User, Images
+  ChevronLeft, ChevronRight, User, Images,
+  Wrench, Briefcase, Info, UserCircle, Globe
 } from 'lucide-react';
 
-const navItems = [
-  { icon: LayoutDashboard, label: 'Dashboard', path: '/dashboard' },
-  { icon: FolderKanban, label: 'Projects', path: '/dashboard/projects' },
-  { icon: Receipt, label: 'Expenses', path: '/dashboard/expenses' },
-  { icon: Kanban, label: 'Canvas', path: '/dashboard/canvas' },
-  { icon: Images, label: 'Gallery', path: '/dashboard/gallery' },
-  { icon: BarChart2, label: 'Reports', path: '/dashboard/reports' },
-  { icon: Settings, label: 'Settings', path: '/dashboard/settings' },
+const navGroups = [
+  {
+    label: 'Operations',
+    items: [
+      { icon: LayoutDashboard, label: 'Dashboard', path: '/dashboard' },
+      { icon: FolderKanban, label: 'Projects', path: '/dashboard/projects' },
+      { icon: Receipt, label: 'Expenses', path: '/dashboard/expenses' },
+      { icon: Kanban, label: 'Canvas', path: '/dashboard/canvas' },
+      { icon: BarChart2, label: 'Reports', path: '/dashboard/reports' },
+    ],
+  },
+  {
+    label: 'Website',
+    items: [
+      { icon: Wrench, label: 'Services', path: '/dashboard/services' },
+      { icon: Briefcase, label: 'Portfolio', path: '/dashboard/portfolio' },
+      { icon: Images, label: 'Gallery', path: '/dashboard/gallery' },
+      { icon: Info, label: 'About Page', path: '/dashboard/about' },
+      { icon: UserCircle, label: 'Co-Founder', path: '/dashboard/co-founder' },
+    ],
+  },
+  {
+    label: 'System',
+    items: [
+      { icon: Settings, label: 'Settings', path: '/dashboard/settings' },
+    ],
+  },
 ];
+
+// flat list for header title lookup
+const allNavItems = navGroups.flatMap(g => g.items);
 
 export default function DashboardLayout() {
   const [collapsed, setCollapsed] = useState(false);
   const location = useLocation();
 
-  const currentPage = navItems.find(n => n.path === location.pathname)?.label || 'Dashboard';
+  const currentPage = allNavItems.find(n => location.pathname === n.path || location.pathname.startsWith(n.path + '/'))?.label || 'Dashboard';
 
   return (
     <div style={{ display: 'flex', minHeight: '100vh', background: 'var(--bg)' }}>
@@ -49,26 +72,36 @@ export default function DashboardLayout() {
 
         {/* Nav */}
         <nav style={{ flex: 1, padding: '16px 0', overflowY: 'auto' }}>
-          {navItems.map(({ icon: Icon, label, path }) => {
-            const active = location.pathname === path;
-            return (
-              <Link key={path} to={path} style={{
-                display: 'flex', alignItems: 'center', gap: 12,
-                padding: collapsed ? '12px 22px' : '12px 24px',
-                color: active ? '#fff' : 'rgba(255,255,255,0.6)',
-                background: active ? 'rgba(77,166,255,0.2)' : 'transparent',
-                borderLeft: active ? '3px solid var(--primary)' : '3px solid transparent',
-                transition: 'all 0.2s', textDecoration: 'none',
-                whiteSpace: 'nowrap',
-              }}
-                onMouseEnter={e => { if (!active) e.currentTarget.style.background = 'rgba(255,255,255,0.06)'; }}
-                onMouseLeave={e => { if (!active) e.currentTarget.style.background = 'transparent'; }}
-                title={collapsed ? label : ''}>
-                <Icon size={18} style={{ flexShrink: 0 }} />
-                {!collapsed && <span style={{ fontSize: 14, fontWeight: active ? 600 : 400 }}>{label}</span>}
-              </Link>
-            );
-          })}
+          {navGroups.map(group => (
+            <div key={group.label}>
+              {!collapsed && (
+                <div style={{ padding: '8px 24px 4px', fontSize: 10, fontWeight: 700, textTransform: 'uppercase', letterSpacing: 1.2, color: 'rgba(255,255,255,0.3)' }}>
+                  {group.label}
+                </div>
+              )}
+              {collapsed && <div style={{ height: 8 }} />}
+              {group.items.map(({ icon: Icon, label, path }) => {
+                const active = location.pathname === path || (path !== '/dashboard' && location.pathname.startsWith(path + '/'));
+                return (
+                  <Link key={path} to={path} style={{
+                    display: 'flex', alignItems: 'center', gap: 12,
+                    padding: collapsed ? '12px 22px' : '11px 24px',
+                    color: active ? '#fff' : 'rgba(255,255,255,0.6)',
+                    background: active ? 'rgba(77,166,255,0.2)' : 'transparent',
+                    borderLeft: active ? '3px solid var(--primary)' : '3px solid transparent',
+                    transition: 'all 0.2s', textDecoration: 'none',
+                    whiteSpace: 'nowrap',
+                  }}
+                    onMouseEnter={e => { if (!active) e.currentTarget.style.background = 'rgba(255,255,255,0.06)'; }}
+                    onMouseLeave={e => { if (!active) e.currentTarget.style.background = 'transparent'; }}
+                    title={collapsed ? label : ''}>
+                    <Icon size={18} style={{ flexShrink: 0 }} />
+                    {!collapsed && <span style={{ fontSize: 14, fontWeight: active ? 600 : 400 }}>{label}</span>}
+                  </Link>
+                );
+              })}
+            </div>
+          ))}
         </nav>
 
         {/* Collapse toggle */}

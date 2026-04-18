@@ -21,6 +21,10 @@ import CanvasBoard from './pages/dashboard/CanvasBoard';
 import ReportsPage from './pages/dashboard/ReportsPage';
 import SettingsPage from './pages/dashboard/SettingsPage';
 import GalleryManage from './pages/dashboard/GalleryManage';
+import ServicesManage from './pages/dashboard/ServicesManage';
+import PortfolioManage from './pages/dashboard/PortfolioManage';
+import AboutManage from './pages/dashboard/AboutManage';
+import CoFounderManage from './pages/dashboard/CoFounderManage';
 
 export default function App() {
   return (
@@ -47,6 +51,10 @@ export default function App() {
           <Route path="expenses" element={<ExpensesPage />} />
           <Route path="canvas" element={<CanvasBoard />} />
           <Route path="gallery" element={<GalleryManage />} />
+          <Route path="services" element={<ServicesManage />} />
+          <Route path="portfolio" element={<PortfolioManage />} />
+          <Route path="about" element={<AboutManage />} />
+          <Route path="co-founder" element={<CoFounderManage />} />
           <Route path="reports" element={<ReportsPage />} />
           <Route path="settings" element={<SettingsPage />} />
         </Route>
