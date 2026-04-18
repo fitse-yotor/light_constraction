@@ -8,6 +8,7 @@ const links = [
   { label: 'Services', to: '/services' },
   { label: 'Portfolio', to: '/portfolio' },
   { label: 'Gallery', to: '/gallery' },
+  { label: 'Co-Founder', to: '/co-founder' },
   { label: 'Contact', to: '/#contact' },
 ];
 

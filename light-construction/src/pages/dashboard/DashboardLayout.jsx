@@ -1,10 +1,12 @@
 import { useState } from 'react';
-import { Link, useLocation, Outlet } from 'react-router-dom';
+import { Link, useLocation, Outlet, useNavigate } from 'react-router-dom';
 import {
   LayoutDashboard, FolderKanban, Receipt, Kanban,
   BarChart2, Settings, Bell, Search,
   ChevronLeft, ChevronRight, User, Images,
-  Wrench, Briefcase, Info, UserCircle, Globe
+  Wrench, Briefcase, Info, UserCircle, Globe,
+  Star, Megaphone, FileText, GanttChart, Layout,
+  SearchCode, Truck, Users, LogOut
 } from 'lucide-react';
 
 const navGroups = [
@@ -14,8 +16,11 @@ const navGroups = [
       { icon: LayoutDashboard, label: 'Dashboard', path: '/dashboard' },
       { icon: FolderKanban, label: 'Projects', path: '/dashboard/projects' },
       { icon: Receipt, label: 'Expenses', path: '/dashboard/expenses' },
-      { icon: Kanban, label: 'Canvas', path: '/dashboard/canvas' },
+      { icon: Kanban, label: 'Planning', path: '/dashboard/canvas' },
+      { icon: GanttChart, label: 'Timeline', path: '/dashboard/timeline' },
       { icon: BarChart2, label: 'Reports', path: '/dashboard/reports' },
+      { icon: FileText, label: 'Documents', path: '/dashboard/documents' },
+      { icon: Truck, label: 'Vendors', path: '/dashboard/vendors' },
     ],
   },
   {
@@ -26,24 +31,34 @@ const navGroups = [
       { icon: Images, label: 'Gallery', path: '/dashboard/gallery' },
       { icon: Info, label: 'About Page', path: '/dashboard/about' },
       { icon: UserCircle, label: 'Co-Founder', path: '/dashboard/co-founder' },
+      { icon: Star, label: 'Testimonials', path: '/dashboard/testimonials' },
+      { icon: Megaphone, label: 'Announcements', path: '/dashboard/announcements' },
+      { icon: Layout, label: 'Homepage', path: '/dashboard/homepage' },
+      { icon: SearchCode, label: 'SEO', path: '/dashboard/seo' },
     ],
   },
   {
     label: 'System',
     items: [
+      { icon: Users, label: 'Users', path: '/dashboard/users' },
       { icon: Settings, label: 'Settings', path: '/dashboard/settings' },
     ],
   },
 ];
 
-// flat list for header title lookup
 const allNavItems = navGroups.flatMap(g => g.items);
 
-export default function DashboardLayout() {
+export default function DashboardLayout({ user, onLogout }) {
   const [collapsed, setCollapsed] = useState(false);
   const location = useLocation();
+  const navigate = useNavigate();
 
   const currentPage = allNavItems.find(n => location.pathname === n.path || location.pathname.startsWith(n.path + '/'))?.label || 'Dashboard';
+
+  const handleLogout = () => {
+    onLogout();
+    navigate('/login');
+  };
 
   return (
     <div style={{ display: 'flex', minHeight: '100vh', background: 'var(--bg)' }}>
@@ -143,10 +158,14 @@ export default function DashboardLayout() {
                 <User size={16} color="#fff" />
               </div>
               <div>
-                <div style={{ fontSize: 13, fontWeight: 600 }}>Admin</div>
-                <div style={{ fontSize: 11, color: 'var(--text-secondary)' }}>Manager</div>
+                <div style={{ fontSize: 13, fontWeight: 600 }}>{user?.name || 'Admin'}</div>
+                <div style={{ fontSize: 11, color: 'var(--text-secondary)', textTransform: 'capitalize' }}>{user?.role || 'Manager'}</div>
               </div>
             </div>
+            <button onClick={handleLogout} title="Sign out"
+              style={{ background: 'none', border: '1px solid #e2e8f0', color: 'var(--text-secondary)', borderRadius: 8, padding: '6px 10px', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 6, fontSize: 13 }}>
+              <LogOut size={15} /> Sign out
+            </button>
           </div>
         </header>
 
